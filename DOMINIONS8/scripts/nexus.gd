@@ -31,7 +31,7 @@ var enemy_bot_buildings
 @export var max_health: int = 100
 @export var current_health: int
 @export var max_mana: int = 1000
-@export var mana_per_second: int = 1
+@export var mana_per_second: int = 50
 @export var team_color: String
 @export var protection: int = 15
 @export var controlled_by: String
@@ -215,18 +215,9 @@ func _physics_process(delta: float):
 	else: 
 		$castleicon.modulate = Color.WHITE
 
-	if current_mana < max_mana and game_active: 
-		# You know all about the issues with tying framerate to physics right?  Plenty of games
-		# do that and cause all sorts of problems when running at fps higher or lower than intended.
-		# Thats why the right way to do it is to handle physics with the physics delta, or a value
-		# not dependant on the fps, but on a constant time ratio.  A higher delta value means
-		# whatever you do your physics stuff for more time.  Here, a delta of 1 means one second.
-		# If you add 1 mana regardless of the delta, you end up with the same problem in reverse.
-		# This also means we need to change the type of current_mana from int to float.
-		# We multiply by Engine.physics_tics_per_second because otherwise at 60pfps, it would take
-		# 60 seconds to add 1 mana.  60 calls per seconds means delta = 1/60 = 0.01666...
-		current_mana += mana_per_second * Engine.physics_ticks_per_second * delta
-	
+	if current_mana < max_mana and game_active:
+		current_mana += mana_per_second *  delta
+
 	manabar.value = current_mana
 	
 	if controlled_by == "ai":
