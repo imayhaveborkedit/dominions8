@@ -230,6 +230,8 @@ func _physics_process(delta: float):
 # The mana cost handling has been moved to a new function, try_spawn_unit().
 func _unhandled_key_input(event: InputEvent):
 	if event is InputEventKey:
+		if not event.pressed:
+			return
 		match event.keycode:
 			# Unit selection keys
 			KEY_S: set_selected_unit(unit_slinger, slinger_mana_cost)
