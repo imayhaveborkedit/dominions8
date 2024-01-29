@@ -36,6 +36,8 @@ var enemy_bot_buildings
 @export var protection: int = 15
 @export var controlled_by: String
 
+signal nexus_death(color: String)
+
 # Using named constants like an enum is better than using arbitrary strings.
 # So called "stringly typed code" and is prone to various issues,
 # namely typos and does not benefit from type checking and introspection.
@@ -256,4 +258,8 @@ func _unhandled_input(event: InputEvent):
 			match event.button_index:
 				MOUSE_BUTTON_LEFT when event.is_pressed(): 
 					try_spawn_unit(selected_unit, get_random_lane())
-			
+
+
+func _on_health_bar_value_changed(value: float) -> void:
+	if value <= 0:
+		nexus_death.emit(team_color)

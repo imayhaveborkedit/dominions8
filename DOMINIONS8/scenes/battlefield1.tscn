@@ -916,3 +916,5 @@ lane = "bot"
 team_color = "red"
 
 [connection signal="pressed" from="announcement/Button" to="announcement" method="_on_button_pressed"]
+[connection signal="nexus_death" from="red_nexus" to="announcement" method="_on_nexus_death"]
+[connection signal="nexus_death" from="blue_nexus" to="announcement" method="_on_nexus_death"]
