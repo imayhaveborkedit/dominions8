@@ -11,7 +11,7 @@ var hurler_mana_cost: int = 150
 var berserker_mana_cost: int = 170
 var heavycav_mana_cost: int = 170
 var wizard_mana_cost: int = 160
-var game_active: bool = true
+static var game_active: bool = true
 var enemy_top_buildings
 var enemy_mid_buildings
 var enemy_bot_buildings
@@ -230,7 +230,7 @@ func _physics_process(delta: float):
 # The mana cost handling has been moved to a new function, try_spawn_unit().
 func _unhandled_key_input(event: InputEvent):
 	if event is InputEventKey:
-		if not event.pressed:
+		if not event.pressed or not game_active:
 			return
 		match event.keycode:
 			# Unit selection keys
@@ -255,4 +255,6 @@ func _unhandled_input(event: InputEvent):
 
 func _on_health_bar_value_changed(value: float) -> void:
 	if value <= 0:
+		game_active = false
 		nexus_death.emit(team_color)
+		queue_free()

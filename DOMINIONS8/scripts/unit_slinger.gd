@@ -43,7 +43,8 @@ func navigate_to_waypoints():
 		print("no waypoints")
 	elif current_waypoint_index == waypoints.size():
 		print("touchdown")
-	
+		queue_free()
+
 func check_aggro_area():
 	var overlapping_bodies = $aggro_area.get_overlapping_bodies()
 	if overlapping_bodies.size() == 0:
