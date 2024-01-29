@@ -149,6 +149,9 @@ func _ready():
 		$teamcoloricon.set_self_modulate(Color(0,0,1))
 	$AnimatedSprite2D.play("sprite1")
 
+	nav.debug_enabled = get_tree().get_first_node_in_group("map").get("nav_debug") or false
+
+
 func _physics_process(delta):
 	if current_health > 0:
 		#find_closest_enemy()

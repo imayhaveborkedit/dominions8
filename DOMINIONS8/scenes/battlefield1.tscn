@@ -1423,7 +1423,10 @@ Lanes:[code]
   lmb - Random lane[/code]
 Debug:[code]
   F1 - Toggle navmap
-  F9 - Reload scene[/code]"
+  F3 - Toggle unit pathing
+  F4 - Toggle freespawn
+  F9 - Reload scene
+[/code]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
